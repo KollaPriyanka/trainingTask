@@ -1,0 +1,76 @@
+DOCKERS 
+Part A
+    1. With minimal possible layers to install Web Services and expose appropriate http port for accessing:
+
+        1. Created a nodejs app, opened a port and run it from our machine
+        2. Exposed a port 8080
+        3. When we build the image we use 
+        “docker build -t nodeapp -f Dockerfile .”
+        When we run the image , we map the port with 8080 in our local machine.
+        “docker run -d -p 8090:8080 nodeapp”
+        The repository in Github: https://github.com/SumaVarshitha/Trainingassessment.git
+
+
+    2. Docker Container is not Starting
+        
+        1. Check if Port is already used byanother service.
+        2. Check if Docker daemon stopped working.
+        3. Check if the container with the same name already exists.
+        4. Check if the User does not have enough permissions to the directory.
+        6. Check if proxy is not setup with docker registry.
+        7. Check the storage availability in device.
+
+PART B
+    1.Using shell command search for a particular pattern (of your choice) to search Docker logs using awk command
+        Awk command can be used to find a particular pattern in logs.For instance “docker logs <container_name> | grep <find element> | awk '{print $1}'” formats the logs of the container and prints only the lines containing ‘add’. 
+
+    2. Execute a shell command inside a container to search for a file.
+        To execute find command inside a running container
+        “docker exec –it <container name> find / -name <filename>”
+       
+
+JENKINS
+PART A
+    1. There is a Jenkins pipeline failure the failure error at the outset suggest that build has failed and one of the tool used for the build is running inside the container – what are the commands you will use for debugging the issue
+
+        1. docker stats <container id> --> when we are using any metrics, and they show how the error occured
+        2. docker logs <container id> --> basic command which shows all i/p o/p and errors of a container
+        3. docker exec -it <container_id> /bin/bash --> go inside a container and debug
+        4. docker commit <container_id> my-container && docker run -it my-container /bin/bash --> if we cant really start a container
+        
+
+    2. There is a build failure due to connectivity issue with one of the tools – what actions you will take to narrow down the issue.
+
+        
+        1. Checking whether the credentials are properly configured
+        2. Checing whether the required plugins for the required tools are correctly installed
+        3. In case of master-slave configuration check whether master and slave are properly configured
+        4. Check whether the apis written are properly working.
+        5. Check whether the configured secret-token got expired.
+
+
+    3. Why Docker Push fails?
+
+        1. Authentication issue
+        2. Access denied to docker hub
+        3. Wrong tags being provided
+        4. Docker push halts without an error because of incorrect urls/image being timed out--> restarting docker helps
+        5. In the Jenkins credentials, credentials might not be added properly
+        6. In Jenkins file the stage may not be correct(syntax errors) or the proper credential name not specified
+        7. Directly using the login credentials, without using "with credentials"
+        8. Registry URL can be incorrect
+        9. Docker pipeline plugin may not be installed.
+
+    4. Write a shell script to setup git repo, docker build, push image to docker repository.
+        Clone the shell script and give executable permissions to the file
+        The repository in github: https://github.com/SumaVarshitha/Trainingassessment/blob/main/Dockershellscript/dockerbuild.sh
+        Give chmod +x <filename> to execute a shellscript.
+
+               
+
+
+
+               
+
+               
+
