@@ -8,7 +8,7 @@ Part A
         “docker build -t nodeapp -f dockerfile .”
         When we run the image , we map the port with 8080 in our local machine.
         “docker run -d -p 8090:8080 nodeapp”
-        The repository in Github: https://github.com/SumaVarshitha/Trainingassessment.git
+        The repository in Github: https://github.com/KollaPriyanka/trainingTask.git
 
 
     2. Docker Container is not Starting
@@ -19,6 +19,11 @@ Part A
         4. Check if the User does not have enough permissions to the directory.
         6. Check if proxy is not setup with docker registry.
         7. Check the storage availability in device.
+        8. Container build cache.
+        9. Running too many services in the same container.
+        10. Authentication error while pulling the image form Docker registry.
+
+
 
 PART B
     1.Using shell command search for a particular pattern (of your choice) to search Docker logs using awk command
