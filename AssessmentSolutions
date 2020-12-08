@@ -14,25 +14,39 @@ Part A
     2. Docker Container is not Starting
         
         1. Check if Port is already used byanother service.
-        2. Check if Docker daemon stopped working.
+        2. Authentication error while pulling the image form Docker registry.
         3. Check if the container with the same name already exists.
-        4. Check if the User does not have enough permissions to the directory.
+        4. Running too many services in the same container.
         6. Check if proxy is not setup with docker registry.
         7. Check the storage availability in device.
-        8. Container build cache.
-        9. Running too many services in the same container.
-        10. Authentication error while pulling the image form Docker registry.
-
+        8. Check if the User does not have enough permissions to the directory.
+        9. Container build cache. 
+        10.Check if Docker daemon stopped working.
 
 
 PART B
     1.Using shell command search for a particular pattern (of your choice) to search Docker logs using awk command
         Awk command can be used to find a particular pattern in logs.For instance “docker logs <container_name> | grep <find element> | awk '{print $1}'” formats the logs of the container and prints only the lines containing ‘add’. 
+          #! /bin/bash
+          echo "enter the container name or id"
+          read con
+          docker logs $con >output.txt
+          echo "Type the words to be searched in log..."
+          read pattern
+          awk '/'"$pattern"'/{ print $0 }' output.txt
 
     2. Execute a shell command inside a container to search for a file.
-        To execute find command inside a running container
-        “docker exec –it <container name> find / -name <filename>”
-       
+       (a) To execute find command inside a running container --- “docker exec –it <container name> find / -name <filename>”
+       #! /bin/bash
+       echo "enter the container name or id"
+       read con
+       echo "Type the file to be find"
+       read filename
+       docker exec -it $con find -name $filename
+       (b)If we want to get an interactive terminal, run the same command as follows.
+          “docker exec –it <container name> find / -name <filename> /bin/bash”
+
+
 
 JENKINS
 PART A
@@ -42,7 +56,7 @@ PART A
         2. docker logs <container id> --> basic command which shows all i/p o/p and errors of a container
         3. docker exec -it <container_id> /bin/bash --> go inside a container and debug
         4. docker commit <container_id> my-container && docker run -it my-container /bin/bash --> if we cant really start a container
-        
+        5. docker cp <container_id>:/pathinserver /local-path --> to save the container log locally and debug the issue.
 
     2. There is a build failure due to connectivity issue with one of the tools – what actions you will take to narrow down the issue.
 
@@ -52,6 +66,10 @@ PART A
         3. In case of master-slave configuration check whether master and slave are properly configured
         4. Check whether the apis written are properly working.
         5. Check whether the configured secret-token got expired.
+        6. Due to proxy connectivity issue build failure may occur.
+        7. Due to network traffic connectivity  issue may occur.
+        8. Build failure analyzer to analyze the exact issue
+
 
 
     3. Why Docker Push fails?
@@ -65,6 +83,9 @@ PART A
         7. Directly using the login credentials, without using "with credentials"
         8. Registry URL can be incorrect
         9. Docker pipeline plugin may not be installed.
+        10.Conflict with other image (When two builds are triggered at the same time with same image name , one will pass and the other will throw an error)
+        11.Improper tagging of image (Image has to be tagged while building and then only it can be pushed using that tag) 
+
 
     4. Write a shell script to setup git repo, docker build, push image to docker repository.
         Clone the shell script and give executable permissions to the file
