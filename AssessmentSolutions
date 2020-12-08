@@ -89,7 +89,8 @@ PART A
 
     4. Write a shell script to setup git repo, docker build, push image to docker repository.
         Clone the shell script and give executable permissions to the file
-        The repository in github: https://github.com/SumaVarshitha/Trainingassessment/blob/main/Dockershellscript/dockerbuild.sh
+        The repository in github: 
+        https://github.com/KollaPriyanka/trainingTask/blob/main/Dockershellscript/dockerbuild.sh
         Give chmod +x <filename> to execute a shellscript.
 
                
